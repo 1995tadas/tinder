@@ -10,7 +10,7 @@
 <h1>My first PHP page</h1>
 
 <?php
-echo "Hello world !!!";
+echo "Sveikas pasauli!!!";
 ?>     
 
     
