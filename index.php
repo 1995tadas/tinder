@@ -2,17 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Aš valdau HTML !</title>
 </head>
 <body>
-   
+   <!--Komentaras !-->
        
-<h1>My first PHP page</h1>
-
-<?php
-echo "Sveikas pasauli!!!";
-?>     
-
+   <h1><b>Tadas</b> - HTML asas</h1>
+<p>Moku kurti statinį turinį.</p>
     
 </body>
 </html>
