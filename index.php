@@ -6,9 +6,9 @@
         <title>inline</title>
     </head>
     <body>
-        <div style= "<?php print "top:" . rand(0, 718) . "px;" . "left:" . rand(0, 1316) . "px;" ?>
-             ">
-        </div>
+        <p class = "class-<?php print rand(1, 3) ?>">VIENAS</p>
+        <p class = "class-<?php print rand(1, 3) ?>">DU</p>
+        <p class = "class-<?php print rand(1, 3) ?>">TRYS</p>
     </body>
 </html>
 
