@@ -2,26 +2,11 @@
 <html lang="lt">
     <head>
         <meta charset="UTF-8">
-        <title>Komentarai </title>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <title>PHP lydės ir <?php print date('Y', strtotime('+' . rand(0, 10) . 'years')); ?>  </title>
     </head>
     <body>
-        <?php
-        /*
-          <div>
-          <h1>Aš pradedu</h1>
-          <h2>O aš papildau</h2>
-          </div>
-          <!-- Štai čia yra pirmasis div konteineris kuriame yra du h tagai -->
-         */
-        ?>
-        <!-- 
-        <div>
-             <p>
-             Aš esu ta pana, kuri kalba ir kalba, ir kalba, ir kalba...
-             </p> 
-         </div>!
-        -->
+        <h1><b>Tadas</b> - Galbūt turėsiu <?php print rand(1, 5) ?> vaikų(us)! </h1>
+        <p>D.Trump's nebebus prezidentu <?php print rand(2021, 2031) . ' ' . date('m d'); ?></p>
     </body>
 </html>
 
