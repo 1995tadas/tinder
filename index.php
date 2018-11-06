@@ -2,11 +2,11 @@
 <html lang="lt">
     <head>
         <meta charset="UTF-8">
-        <title>PHP lydės ir <?php print date('Y', strtotime('+' . rand(0, 10) . 'years')); ?>  </title>
+        <title>inline</title>
     </head>
-    <body>
-        <h1><b>Tadas</b> - Galbūt turėsiu <?php print rand(1, 5) ?> vaikų(us)! </h1>
-        <p>D.Trump's nebebus prezidentu <?php print rand(2021, 2031) . ' ' . date('m d'); ?></p>
+    <body style = "background-color:rgb(<?php print rand(0, 255) . ',' . rand(0, 255) . ',' . rand(0, 255) ?>)";>
+        <h1 style = "font-size:<?php print rand(5, 50) . 'px' ?>">Tekstas</h1>
+        <p style = "color:rgb(<?php print rand(0, 255) . ',' . rand(0, 255) . ',' . rand(0, 255) ?>)">D.Trump's nebebus prezidentu <?php print rand(2021, 2031) . ' ' . date('m d'); ?></p>
     </body>
 </html>
 
