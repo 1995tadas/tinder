@@ -1,9 +1,23 @@
+.kauliukas {
+    height:100px;
+    width:100px;
+    background-size:cover; 
+}
 .class-1 {
-  color:red;  
+    background-image: url("https://mbtskoudsalg.com/explore/dice-faces-png#gal_post_3612_dice-faces-png-5.png");
 }
 .class-2 {
-    color:blue;
+    background-image: url("");
 }
 .class-3 {
-    color:green;
+    background-image: url("https://www.freeiconspng.com/img/27672");
+}
+.class-4 {
+    background-image: url("");
+}
+.class-5 {
+    background-image: url("https://mbtskoudsalg.com/explore/dice-faces-png/#gal_post_3612_dice-5-png.png");
+}
+.class-6 {
+    background-image: url("");
 }

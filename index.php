@@ -6,9 +6,6 @@
         <title>inline</title>
     </head>
     <body>
-        <p class = "class-<?php print rand(1, 3) ?>">VIENAS</p>
-        <p class = "class-<?php print rand(1, 3) ?>">DU</p>
-        <p class = "class-<?php print rand(1, 3) ?>">TRYS</p>
+        <div class="kauliukas class-<?php print rand(1, 6) ?>"></div>
     </body>
 </html>
-
