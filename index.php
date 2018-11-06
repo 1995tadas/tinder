@@ -9,7 +9,7 @@
         <h1><b>Tadas</b> - HTML <?php print "ir PHP" ?> asas jau <?php print date('Y').' metų';?></h1>
         <p>
             Viskas prasidėjo 
-            <?php print date('m d').' dieną !';?>
+            <?php print date('m').' mėnesio '.date('d').' dieną !';?>
         </p>  
     </body>
 </html>
