@@ -6,7 +6,12 @@
     </head>
     <body>
         <?php
-        print str_replace(' ','<br>','I\'m addicted to brake fluid, but I can stop whenever I want.')
+        $string = "tadas";
+        $integer = 0;
+        $float = 2.145;
+        $bolean = true;
+        $null = null;
+        print "$string $integer $float $bolean $null";
         ?>
     </body>
 </html>
