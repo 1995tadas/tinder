@@ -1,17 +1,33 @@
 <?php
-$liepa_days = 31;
-$rugpjutis_days = 30;
-$rugsejis_days = 30;
-$spalis_days = 31;
-$summer_days = $liepa_days + $rugpjutis_days + $rugsejis_days + $spalis_days + date('j');
+$sunny = rand(0, 1);
+if ($sunny) {
+    $oras = 'Saulėta!';
+    $klase = 'sauleta';
+} else {
+    $oras = 'Debesuota :(';
+    $klase = 'debesuota';
+}
 ?>
-
 <!DOCTYPE html>
 <html>
     <head> 
         <title></title>
+        <style>
+            .klase {
+                background-size: cover;
+                width: 100px;
+                height: 100px
+            }
+            .debesuota {
+                background-image:url(/images/debesys.png);
+            }
+            .sauleta {
+                background-image:url(/images/saule.png);
+            }
+        </style>
     </head>
     <body>
-        <p> Nuo Liepos pradžios iki šiandien praėjo <?php print $summer_days ?> dienų.!</p>
+        <div class="klase <?php print $klase ?>"></div>
+        <h1><?php print $oras ?></h1>
     </body>
 </html>
