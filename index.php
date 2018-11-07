@@ -6,12 +6,12 @@
     </head>
     <body>
         <?php
-        $string = "tadas";
+        $string = "Tadas";
         $integer = 0;
         $float = 2.145;
         $bolean = true;
         $null = null;
-        print "$string $integer $float $bolean $null";
+        print "$string <br> $integer <br> $float <br> $bolean <br> $null";
         ?>
     </body>
 </html>
