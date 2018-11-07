@@ -1,15 +1,19 @@
 <?php
 $sunny = rand(0, 1);
 $rain = rand(0, 1);
-if ($sunny && $rain == true) {
+
+if ($sunny && !$rain) {
     $oras = 'Saulėta!';
     $klase = 'sauleta';
-} elseif ($sunny && $rain == false) {
+} elseif (!($rain && $sunny)) {
     $oras = 'Debesuota :(';
     $klase = 'debesuota';
-} else {
-    $oras = 'Pragiedruliai';
-    $klase = 'pragiedruliai';
+} elseif (!$sunny && $rain) {
+    $oras = 'Debesuota su lietum';
+    $klase = 'debesuotasulietum';
+} elseif ($sunny && $rain) {
+    $oras = 'Saulėta su lietum';
+    $klase = 'sauletasulietum';
 }
 ?>
 <!DOCTYPE html>
@@ -28,8 +32,11 @@ if ($sunny && $rain == true) {
             .sauleta {
                 background-image:url(/images/saule.png);
             }
-            .pragiedruliai {
+            .debesuotasulietum {
                 background-image:url(/images/pragiedruliai.png);
+            }
+            .sauletasulietum {
+                background-image:url(/images/sauletasulietum.jpg);
             }
         </style>
     </head>
