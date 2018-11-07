@@ -8,6 +8,7 @@
             }
             .bomb0{
                 content:url("/images/explosion.gif");
+                transform:scale(1);
             }
         </style>
     </head>
