@@ -1,11 +1,15 @@
 <?php
 $sunny = rand(0, 1);
-if ($sunny) {
+$rain = rand(0, 1);
+if ($sunny && $rain == true) {
     $oras = 'Saulėta!';
     $klase = 'sauleta';
-} else {
+} elseif ($sunny && $rain == false) {
     $oras = 'Debesuota :(';
     $klase = 'debesuota';
+} else {
+    $oras = 'Pragiedruliai';
+    $klase = 'pragiedruliai';
 }
 ?>
 <!DOCTYPE html>
@@ -23,6 +27,9 @@ if ($sunny) {
             }
             .sauleta {
                 background-image:url(/images/saule.png);
+            }
+            .pragiedruliai {
+                background-image:url(/images/pragiedruliai.png);
             }
         </style>
     </head>
