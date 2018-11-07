@@ -1,47 +1,45 @@
 <?php
-$sunny = rand(0, 1);
-$rain = rand(0, 1);
-
-if ($sunny && !$rain) {
-    $oras = 'Saulėta!';
-    $klase = 'sauleta';
-} elseif (!($rain && $sunny)) {
-    $oras = 'Debesuota :(';
-    $klase = 'debesuota';
-} elseif (!$sunny && $rain) {
-    $oras = 'Debesuota su lietum';
-    $klase = 'debesuotasulietum';
-} elseif ($sunny && $rain) {
-    $oras = 'Saulėta su lietum';
-    $klase = 'sauletasulietum';
+$sec = date('s');
+if ($sec % 2 == 0) {
+    $klase = "square";
+} else {
+    $klase = "circle";
 }
 ?>
 <!DOCTYPE html>
 <html>
     <head> 
+        <meta http-equiv="refresh" content=1;URL='index.php'">
         <title></title>
         <style>
-            .klase {
-                background-size: cover;
-                width: 100px;
-                height: 100px
+            .centras{
+                text-align: center;
+                position: absolute;
+                left: 50px;
+                top: -165px;
+                font-size:300px;
             }
-            .debesuota {
-                background-image:url(/images/debesys.png);
+            .vidurys {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
             }
-            .sauleta {
-                background-image:url(/images/saule.png);
-            }
-            .debesuotasulietum {
-                background-image:url(/images/pragiedruliai.png);
-            }
-            .sauletasulietum {
-                background-image:url(/images/sauletasulietum.jpg);
+            .square {
+                width: 400px;
+                height: 400px;
+                background: red;
+            }.circle {
+                width: 400px;
+                height: 400px;
+                background: red;
+                border-radius: 50%;
             }
         </style>
     </head>
     <body>
-        <div class="klase <?php print $klase ?>"></div>
-        <h1><?php print $oras ?></h1>
+        <div class="vidurys <?php print "$klase" ?>"><h1 class="centras"> <?php print "$sec" ?></h1></div>
     </body>
 </html>
