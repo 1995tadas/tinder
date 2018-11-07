@@ -31,7 +31,8 @@ if ($sec % 2 == 0) {
                 width: 400px;
                 height: 400px;
                 background: red;
-            }.circle {
+            }
+            .circle {
                 width: 400px;
                 height: 400px;
                 background: red;
@@ -40,6 +41,8 @@ if ($sec % 2 == 0) {
         </style>
     </head>
     <body>
-        <div class="vidurys <?php print "$klase" ?>"><h1 class="centras"> <?php print "$sec" ?></h1></div>
+        <div class="vidurys <?php print "$klase" ?>">
+            <h1 class="centras"><?php print "$sec" ?></h1>
+        </div>
     </body>
 </html>
