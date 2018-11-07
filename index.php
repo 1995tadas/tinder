@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="lt">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <title>inline</title>
+<html>
+    <head> 
+        <style>
+            .bomb{
+                transform: scale(0.<?php print date('s'); ?>); 
+                content:url("/images/Paveikslėlis1.png");
+            }
+            .bomb0{
+                content:url("/images/explosion.gif");
+            }
+        </style>
     </head>
     <body>
-        <div class="kauliukas class-<?php print rand(1, 6) ?>"></div>
+        <div class = "bomb<?php print date('s') ?> bomb" ></div>
+        <?php
+        print date('s');
+        ?>
+
     </body>
 </html>
