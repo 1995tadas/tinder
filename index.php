@@ -1,24 +1,4 @@
-<?php
-$months = 12;
-$starting_money = 1000;
-$alga = 700;
-$visos_islaidos = 0;
-$likutis = $starting_money;
-$head = null;
-
-for ($i = 0; $i < $months; $i++) {
-    $islaidos = rand(200, 1200);
-    $visos_islaidos += $islaidos;
-    $likutis += $alga - $islaidos;
-    if ($likutis <= 0) {
-        $head = " Bloga prognozė $i mėnesį gali baigtis pinigai!!! <br>";
-        break;
-    }
-}
-
-$vid_islaidos = round($visos_islaidos / $months);
-$head .= "Per $i prognuozuotų mėnesių, vidutinės išlaidos: $vid_islaidos Likutis pabaigoje: $likutis ";
-?>
+<?php ?>
 <!DOCTYPE html>
 <html>
     <head> 
@@ -27,6 +7,8 @@ $head .= "Per $i prognuozuotų mėnesių, vidutinės išlaidos: $vid_islaidos Li
         </style>
     </head>
     <body >
-        <h1><?php print $head ?></h1>
+        <?php for ($i = 1; $i <= 12; $i++): ?>
+            <h1><?php print date('F', mktime(0, 0, 0, $i, 1))?></h1>
+        <?php endfor ?>
     </body>
 </html>
