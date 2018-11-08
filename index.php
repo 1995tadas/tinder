@@ -1,8 +1,7 @@
 <?php
 $x = 10;
-$y = 2;
 $number = null;
-for ($i = 0; $i <= 10; $i++) {
+for ($y = 2; $y < 20; $y++) {
     $number .= "X vertė yra :$x, Y:$y <br>";
     $x += $y;
 }
