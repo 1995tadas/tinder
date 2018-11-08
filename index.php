@@ -1,7 +1,10 @@
 <?php
-$text = 'Pradedam:';
-for ($x = 0; $x <= 10; $x++) {
-    $text .= ' Ciklas';
+$x = 10;
+$y = 2;
+$number = null;
+for ($i = 0; $i <= 10; $i++) {
+    $number .= "X vertė yra :$x, Y:$y <br>";
+    $x += $y;
 }
 ?>
 <!DOCTYPE html>
@@ -9,11 +12,9 @@ for ($x = 0; $x <= 10; $x++) {
     <head> 
         <title></title>
         <style>
-
         </style>
     </head>
     <body >
-        <h1><?php print $text ?>
-        </h1>
+        <h1><?php print $number ?></h1>
     </body>
 </html>
