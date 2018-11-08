@@ -1,10 +1,18 @@
 <?php
-$x = 10;
-$number = null;
-for ($y = 2; $y < 20; $y++) {
-    $number .= "X vertė yra :$x, Y:$y <br>";
-    $x += $y;
+$months = 12;
+$starting_money = 1000;
+$alga = 700;
+$visos_islaidos = 0;
+$likutis = $starting_money;
+
+for ($i = 0; $i < $months; $i++) {
+    $islaidos = rand(200, 500);
+    $visos_islaidos += $islaidos;
+    $likutis += $alga - $islaidos;
 }
+
+$vid_islaidos = $visos_islaidos / $months;
+$head = "Per $months prognuozuotų mėnesių, vidutinės išlaidos: " . round($vid_islaidos) . " Likutis pabaigoje: $likutis";
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +22,6 @@ for ($y = 2; $y < 20; $y++) {
         </style>
     </head>
     <body >
-        <h1><?php print $number ?></h1>
+        <h1><?php print $head ?></h1>
     </body>
 </html>
