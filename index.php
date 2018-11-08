@@ -4,15 +4,20 @@ $starting_money = 1000;
 $alga = 700;
 $visos_islaidos = 0;
 $likutis = $starting_money;
+$head = null;
 
 for ($i = 0; $i < $months; $i++) {
-    $islaidos = rand(200, 500);
+    $islaidos = rand(200, 1200);
     $visos_islaidos += $islaidos;
     $likutis += $alga - $islaidos;
+    if ($likutis <= 0) {
+        $head = " Bloga prognozė $i mėnesį gali baigtis pinigai!!! <br>";
+        break;
+    }
 }
 
-$vid_islaidos = $visos_islaidos / $months;
-$head = "Per $months prognuozuotų mėnesių, vidutinės išlaidos: " . round($vid_islaidos) . " Likutis pabaigoje: $likutis";
+$vid_islaidos = round($visos_islaidos / $months);
+$head .= "Per $i prognuozuotų mėnesių, vidutinės išlaidos: $vid_islaidos Likutis pabaigoje: $likutis ";
 ?>
 <!DOCTYPE html>
 <html>
