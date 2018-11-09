@@ -1,30 +1,15 @@
 <?php
-$index = null;
-$sarasas = null;
-$PoVisko = null;
-$produktai = null;
-$fridge = ['Jogurtas', 'Kebabas', 'Alus', 'Sugedę vaisiai', 'Supuvęs avokadas'];
-$noriu = ['Kebabas', 'Alus', 'Pica'];
+$fridge = [
+    'kebabas' => 2.50,
+    'alus' => 1.89,
+    'burokai' => 1.50
+];
 
-foreach ($fridge as $value) {
-    $index .= $value . '<br>';
-}
-$random_idx = rand(0, count($fridge) - 1);
-$print = $fridge[$random_idx];
-
-foreach ($noriu as $norai) {
-    if (in_array($norai, $fridge) == 1) {
-        $produktai .= $norai . ' Turiu' . '<br>';
-    } else {
-        $produktai .= $norai . ' Neturiu' . '<br>';
-    }
-}
-
-$skirtumas = array_diff($fridge, $noriu);
-
-foreach ($skirtumas as $value) {
-    $PoVisko .= $value . '<br>';
-}
+$keys = array_keys($fridge);
+$rand_idx = rand(0, count($keys) - 1);
+$produkto_idx = $keys[$rand_idx];
+$Tekstas = $fridge[$produkto_idx];
+$Tekstas.= " ".$produkto_idx;
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,24 +19,8 @@ foreach ($skirtumas as $value) {
         </style>
     </head>
     <body>
-        <h1>Šaldytuvo turinys: </h1>
-        <p>
-            <?php print $index ?>
-        </p>
-        <h1>Šiandien valgysiu: </h1>
-        <p>
-            <?php print $print ?>
-        </p>
-
-        <h1>Ar viską turiu šaldytuve </h1>
-        <p>
-            <?php
-            print $produktai;
-            ?>
-        </p>
-
-        <h1>Šaldytuvo turinys po visko:</h1>
-        <p><?php print $PoVisko ?></p>
+        <h2>Kažkada pirkai:</h2>
+        <div><?php print $Tekstas ?></div>
     </body>
 </body>
 </html>
