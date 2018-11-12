@@ -1,5 +1,4 @@
 <?php
-
 $PoVisko = null;
 $produktai = null;
 $fridge = ['Jogurtas', 'Kebabas', 'Alus', 'Sugedę vaisiai', 'Supuvęs avokadas'];
@@ -8,15 +7,13 @@ $noriu = ['Kebabas', 'Alus', 'Pica'];
 
 
 foreach ($fridge as $index => $produktas) {
-    foreach ($noriu as $noras) {
-        if ($produktas == $noras) {
+    if (in_array($produktas, $noriu)) {
         unset($fridge[$index]);
-        }
     }
 }
 
 foreach ($fridge as $produktas) {
-        $PoVisko .= $produktas . '<br>';
+    $PoVisko .= $produktas . '<br>';
 }
 ?>
 <!DOCTYPE html>
