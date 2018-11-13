@@ -1,21 +1,7 @@
 <?php
-$daiktu_pavadinimai = ["Kremas", "Riešutai", "Telefonas", "Agurkas", "Dažai", "Raktai", "Alus", "Pienas", "Burokas", "Bulve"];
-$head = null;
-$moters_rankinukas = [];
-for ($i = 0; $i <= rand(0, 5); $i++) {
-    $daiktas = rand(0, (count($daiktu_pavadinimai) - 1));
-    $size = rand(10, 20);
-
-    if (rand(0, 1)) {
-        $bright_dark = "Tamsus";
-    } else {
-        $bright_dark = "Sviesus";
-    }
-    $moters_rankinukas[] = [
-        "pavadinimas" => $daiktu_pavadinimai[$daiktas],
-        "dydis" => $size,
-        "spalva" => $bright_dark
-    ];
+function add($x, $y) {
+$suma = $x + $y;
+print "$x + $y suma:$suma";
 }
 ?>
 <!DOCTYPE html>
@@ -26,9 +12,7 @@ for ($i = 0; $i <= rand(0, 5); $i++) {
         </style>
     </head>
     <body>
-        <?php foreach ($moters_rankinukas as $turinys): ?>
-            <h1><?php print $turinys["pavadinimas"] . " uzima " . $turinys['dydis'] . ' cm3. Daiktas yra ' . $turinys['spalva'] . ". Tikimybe rast yra :" ?></h1>
-        <?php endforeach; ?>
+        <h1><?php add(7,8)?></h1>
     </body>
 </body>
 </html>
