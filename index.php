@@ -1,47 +1,50 @@
 <?php
 $cars_array = [
-    [
-        "modelis" => "Fiat Multipla",
-        "kaina" => "300"
-    ],
-    [
-        "modelis" => "Ford Ka",
-        "kaina" => "250"
-    ]
+  'Fiat Multipla' => [
+    'pavadinimas' => 'Fiat Multipla',
+    'kaina' => '420'
+  ],
+  'Audi 80' => [
+    'pavadinimas' => 'Audi 80',
+    'kaina' => '169'
+  ]
 ];
 /**
- * Prideda prie esamo masyvo mašinos pardavimo kaina su nuolaida ir išspausdina ar apsimokėjo
+ * Funkcija, kuri priima automobilių masyvą ir priklausomai nuo pardavimų kainos,
+ * kuri yra atsitiktinai suskaičiuota, grąžina papildomus elementus masyve, už
+ * kiek ta mašina buvo parduota ir ar apsimokėjo.
  * 
- * @param array $cars_array
- * @return string
+ * @return integer $cars_array Gražinam cars_array masyvą
  */
 function sell_cars($cars_array) {
-    foreach ($cars_array as $key => $masina) {
-        $masina["pardavimo_kaina"] = rand($masina['kaina'] * 0.7, $masina['kaina'] * 1.3);
-        //$masina masyvo key pardavimo_kaina prideda rand +/- 30%
-        if ($masina["pardavimo_kaina"] > $masina['kaina']) {
-            $masina["apsimokejo"] = "taip";
-        } else {
-            $masina["apsimokejo"] = "ne";
-        }
-        //if tikrina ar pardavimo kaina yra didesne uz pradine kaina ir sukuria nauja key apsimokejo su reikšmemis taip arba ne
-        $cars_array[$key] = $masina;
-        //is ramu nuomenys perkelia į masyvą;
-    };
-    return $cars_array;
+  //Ciklas, kuris pereina per visus automobilius ir jų informaciją
+  foreach ($cars_array as $idx => $car_info) {
+    //Paskaiciuojam ar pardavimo kaina +30% ar -30%
+    $sell_price_min = $car_info['kaina'] * 0.7;
+    $sell_price_max = $car_info['kaina'] * 1.3;
+    //Kiekvieną kartą vykdomas ciklas sugeneruoja atsitiktinę kainą [+-30%]
+    $car_info['pard_kaina'] = rand($sell_price_min, $sell_price_max);
+    //Tikriname ar pardavimo kaina yra daugiau už pradinę automobilio kainą
+    if ($car_info['pard_kaina'] > $car_info['kaina']) {
+      $car_info['varke'] = " Taip, apsimokėjo";
+    } else {
+      $car_info['varke'] = " Ne, neapsimokėjo";
+    }
+    //Į tą patį masyvą įtraukiame naują automobilio pardavimo kainą
+    $cars_array[$idx] = $car_info;
+  }
+  return $cars_array;
 }
-se
+$cars_array = sell_cars($cars_array);
+var_dump($cars_array);
 ?>
 <!DOCTYPE html>
 <html>
-    <head> 
-        <title></title>
-        <style>
-
-        </style>
-    </head>
-    <body>
-        <h1> <?php var_dump(sell_cars($cars_array)) ?></h1>
-    </body>
-</body>
+  <head>
+    <style>
+    </style>
+  </head>
+  <body>
+    <h1> </h1>
+  </body>
 </html>
