@@ -1,10 +1,14 @@
 <?php
-if (isset($_POST['tekstas'])) {
-    $skaicius = $_POST['tekstas'];
-    if (strlen($skaicius) > 0) {
-        $kvadratas = pow($skaicius, 2);
-    } else {
-        $kvadratas = "Input negali buti tuscias!!!";
+$answers_array = [
+    "TAIP",
+    "NE",
+    "I DON'T GIVE A FUCK"
+];
+$answer = $answers_array[array_rand($answers_array)];
+
+if (isset($_POST['klausimas'])) {
+    if (strlen($_POST['klausimas']) > 0) {
+        $question = $_POST['klausimas'];
     }
 }
 ?>
@@ -15,13 +19,15 @@ if (isset($_POST['tekstas'])) {
         </style>
     </head>
     <body>
-        <form action = "index.php" method ="POST">
-            Ka pakelti kvadratu:
-            <input name="tekstas" type="text"/>
-            <input type="submit"/>
-        </form>
-        <?php if (isset($kvadratas)): ?>
-            <h1><?php print $kvadratas ?></h1>
+        <?php if (isset($question)): ?>
+            <h1><?php print $question ?></h1>
+            <h2><?php print $answer ?></h2>
         <?php endif; ?>
+
+        <form action = "index.php" method ="POST">
+            Klausimas:
+            <input name="klausimas" type="text" placeholder="Įvesk savo klausimą ..."/>
+            <input type="submit" value="Klausk !!!"/>
+        </form>
     </body>
 </html>
