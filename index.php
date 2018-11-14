@@ -1,50 +1,44 @@
 <?php
-$cars_array = [
-  'Fiat Multipla' => [
-    'pavadinimas' => 'Fiat Multipla',
-    'kaina' => '420'
-  ],
-  'Audi 80' => [
-    'pavadinimas' => 'Audi 80',
-    'kaina' => '169'
-  ]
+$drinks_array = [
+    [
+        'pavadinimas' => 'Vodka',
+        'turis' => 0.7,
+        'promiles' => 40
+    ],
+    [
+        'pavadinimas' => 'Alus',
+        'turis' => 0.5,
+        'promiles' => 4.5
+    ]
 ];
+
 /**
- * Funkcija, kuri priima automobilių masyvą ir priklausomai nuo pardavimų kainos,
- * kuri yra atsitiktinai suskaičiuota, grąžina papildomus elementus masyve, už
- * kiek ta mašina buvo parduota ir ar apsimokėjo.
+ * Programa kuri apskaičiuoja kiek bonkių\bambalių galima išgerti kol gryno alkoholio kiekis neviršis $max_level
  * 
- * @return integer $cars_array Gražinam cars_array masyvą
- */
-function sell_cars($cars_array) {
-  //Ciklas, kuris pereina per visus automobilius ir jų informaciją
-  foreach ($cars_array as $idx => $car_info) {
-    //Paskaiciuojam ar pardavimo kaina +30% ar -30%
-    $sell_price_min = $car_info['kaina'] * 0.7;
-    $sell_price_max = $car_info['kaina'] * 1.3;
-    //Kiekvieną kartą vykdomas ciklas sugeneruoja atsitiktinę kainą [+-30%]
-    $car_info['pard_kaina'] = rand($sell_price_min, $sell_price_max);
-    //Tikriname ar pardavimo kaina yra daugiau už pradinę automobilio kainą
-    if ($car_info['pard_kaina'] > $car_info['kaina']) {
-      $car_info['varke'] = " Taip, apsimokėjo";
-    } else {
-      $car_info['varke'] = " Ne, neapsimokėjo";
-    }
-    //Į tą patį masyvą įtraukiame naują automobilio pardavimo kainą
-    $cars_array[$idx] = $car_info;
-  }
-  return $cars_array;
+ * @param type array $drinks_array
+ * @param type integer $max_level
+ * @return type array $drinks
+ * */
+function drinks($drinks_array, $max_level) {
+    foreach ($drinks_array as $key => $drink) {
+        $pure_alcohol = ($drink['promiles'] / 100) * $drink['turis'];
+        //Apskaičiuojam vieno butelio gryną alkoholio kiekį
+        $drink['gali_isgert'] = floor($max_level / $pure_alcohol);
+        //alkoholio limitą padalinam iš gryno alkoholio kiekio ir gaunam bonkų\bambalių kiekį
+        $drinks_array[$key] = $drink;
+        //assigninam pakeistą vidinį masivą prie išorinio
+    };
+    return $drinks_array;
+    //gražinam į funkciją
 }
-$cars_array = sell_cars($cars_array);
-var_dump($cars_array);
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-    </style>
-  </head>
-  <body>
-    <h1> </h1>
-  </body>
+    <head>
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1> <?php var_dump(drinks($drinks_array, 5)) ?></h1>
+    </body>
 </html>
