@@ -1,10 +1,53 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 23, 2018, 9:47:08 PM
-    Author     : CodeAcademy
-*/
+.header {
+    text-align:center;
+    color:blue;
+}
 
+.header a:hover {
+    color:red;
+}
+
+.showcase-page,.matrica-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+h1 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+//grid
+body {
+  margin: 40px;
+}
+
+.box {
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+  background-size: cover;
+}
+
+.wrapper {
+  width: 600px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(6, 100px);
+  grid-template-rows: 100px 100px 100px;
+  grid-auto-flow: column;
+}
+.facebook-logo {
+    background-image:url(https://en.facebookbrand.com/wp-content/uploads/2016/05/flogo_rgb_hex-brc-site-250.png);
+}
+.twitter-logo {
+     background-image:url(https://seeklogo.com/images/T/twitter-2012-negative-logo-5C6C1F1521-seeklogo.com.png);
+}
+.youtube-logo {
+    background-image:url(https://vignette.wikia.nocookie.net/logopedia/images/e/e1/App_icon_YT.png);
+}
+.pornhub-logo {
+    background-image:url(https://cdn130.picsart.com/243537935029212.png?r1024x1024);
+}
+//end of grid

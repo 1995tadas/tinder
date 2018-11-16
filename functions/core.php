@@ -15,7 +15,7 @@
  * šią vertę spausdina index.php failas
  */
 function run_controller(&$page, $name) {
-    include ('/controllers/' . $name . '.php');    
+    include ('controllers/' . $name . '.php');    
 }
 
 /**
@@ -38,7 +38,7 @@ function run_controller(&$page, $name) {
 function render_page($page, $template_name) {
     // Pradedame bufferinti output'ą į atmintį, o ne ekraną
     ob_start();
-    include ('/templates/pages/' . $template_name . '.tpl.php');
+    include ('templates/pages/' . $template_name . '.tpl.php');
     // Baigiame bufferinti ir tai kas buvo 'subufferinta', 
     // returniname kaip tekstą
     return ob_get_clean();

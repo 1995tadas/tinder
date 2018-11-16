@@ -3,8 +3,8 @@
 // vertes atitinkamai pagal tai, ką daro mūsų puslapis
 
 $page['title'] = 'Kiausai!';
-$page['show_footer'] = false;
-$page['show_header'] = false;
+$page['show_footer'] = true;
+$page['show_header'] = true;
 
 // Visus 'content' skiltyje esančius kintamuosius
 // nustatome pasirinktinai pagal tai, kaip suformavome
