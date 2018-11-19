@@ -9,7 +9,6 @@
     <div class="wrapper">
         <?php foreach ($page['content']['grid'] as $square): ?>
             <div class="box <?php print $square['class'] ?>"> 
-                <?php print $square['text'] ?>
             </div>
         <?php endforeach; ?>
     </div>

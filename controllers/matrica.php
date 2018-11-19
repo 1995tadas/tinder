@@ -17,9 +17,7 @@ for ($i = 1; $i <= 14; $i++) {
     $image = array_rand($grid_class);
     $grid[] = [
         'class' => $grid_class[$image],
-        'text' => 'tekstas'
     ];
 }
-var_dump($grid);
 $page['content']['grid'] = $grid;
 $page['content']['rendered'] = render_page($page, 'page-matrica');
