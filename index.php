@@ -2,18 +2,16 @@
 
 class Text {
 
-    public $textas;
+    public $enemy;
 
-    public function __construct($textas) {
-        $this->textas = $textas;
+    public function __construct($enemy) {
+        print 'Ei, ' . $this->enemy = $enemy . '"!?
+ Iš kurios tu klasės?”';
     }
-
 
 }
 
-$spausdink = new Text('„Kam to reikia!?
- Man patinka funkcijos”');
-print $spausdink->textas;
+$print = new Text('Kazys');
 ?>
 
 
