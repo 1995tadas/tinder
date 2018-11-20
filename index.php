@@ -2,6 +2,8 @@
 
 class Dacikas {
 
+    protected $pask_matavimai;
+
     public function gautiNaujusMatavimus() {
         print "Nežinai, ką matuot";
     }
@@ -10,8 +12,10 @@ class Dacikas {
 
 class TempDacikas extends Dacikas {
 
+
     public function gautiNaujusMatavimus() {
-        print "Dabar yra " . rand(0, 20) . " C silumos";
+        $this ->pask_matavimai = "Dabar yra " . rand(0, 20) . " C silumos";
+        print $this->pask_matavimai;
     }
 
 }
