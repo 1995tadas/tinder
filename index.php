@@ -1,13 +1,16 @@
 <?php
-session_start();
 require 'classes/Database.php';
 require 'classes/Model.php';
+require 'classes/Tinder.php';
+require 'classes/Session.php';
 require 'classes/abstract/AbstractUser.php';
 require 'classes/User.php';
+require 'classes/UserRepository.php';
 $db = new Database("db.txt");
-$user = new User($db);
+$repository = new UserRepository($db);
+$session = new Session($repository);
 $tekstas = null;
-
+            var_dump($db->load());
 
 //register
 if (isset($_POST['register-submit'])) {
@@ -16,9 +19,10 @@ if (isset($_POST['register-submit'])) {
     $email = $_POST['register-email'];
     $password = $_POST['register-password'];
     $repassword = $_POST['register-repassword'];
+    var_dump($_POST);
     if ($password === $repassword) {
-
-        $user->register($email, $password, $username);
+        var_dump($username, $email, $password);
+        $session->register($email, $password, []);
         $tekstas = "Jus uzsiregistravote sekmingai";
     } else {
         $tekstas = "Ivesti slaptazodžiai nevienodi";
@@ -28,15 +32,16 @@ if (isset($_POST['register-submit'])) {
 if (isset($_POST['login-submit'])) {
     $email = $_POST['login-email'];
     $password = $_POST['login-password'];
-    $user->login($email, $password);
+    var_dump($_POST);
+    $session->login($email, $password);
 }
 
 //logout
 if (isset($_POST['login-logout'])) {
-    $user->logout();
+    $session->logout();
 }
 //login-check
-if ($user->isLogggedin()) {
+if ($session->isLogggedin()) {
     $tekstas = "Jus esate prisijunges";
 }
 ?>
@@ -78,7 +83,7 @@ if ($user->isLogggedin()) {
         </style>
     </head>
     <body>
-        <?php if (!($user->isLogggedin())): ?>
+        <?php if (!$session->isLogggedin()): ?>
             <input type='checkbox' id='form-switch'>
             <form id='register-form' action="index.php" method='post'>
                 <input name="register-username" type="text" placeholder="Username" required>
@@ -95,7 +100,7 @@ if ($user->isLogggedin()) {
                 <label for='form-switch'><span>Registracija</span></label>
             </form>
         <?php endif; ?>
-        <?php if (($user->isLogggedin())): ?>
+        <?php if ($session->isLogggedin()): ?>
             <form id='logout-form' action="index.php" method='post'>
                 <button name="login-logout"  type='submit'>Atsijunk</button>
             </form>
