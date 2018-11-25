@@ -12,7 +12,7 @@ class Session {
     }
 
     public function login($email, $password) {
-        var_dump($email, $password);
+         var_dump($this->usrep->load($email));
         $user = $this->usrep->load($email);
         if ($user) {
             if ($user->getPassword() == $password) {
@@ -20,8 +20,6 @@ class Session {
                 $_SESSION['logged_in'] = true;
                 $this->is_logged_in = true;
             }
-        } else {
-            var_dump("NERA USERIO");
         }
     }
 

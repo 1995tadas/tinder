@@ -11,12 +11,11 @@ Class UserRepository {
     }
 
     public function save(User $user) {
-        var_dump($user);
-        $this->model->insertOrUpdate($user->getEmail(), $user);
+       return $this->model->insertOrUpdate($user->getEmail(), $user);
     }
 
     public function load($email) {
-        $this->model->load($email);
+       return $this->model->load($email);
     }
 
 }

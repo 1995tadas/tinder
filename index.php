@@ -10,19 +10,18 @@ $db = new Database("db.txt");
 $repository = new UserRepository($db);
 $session = new Session($repository);
 $tekstas = null;
-            var_dump($db->load());
 
 //register
 if (isset($_POST['register-submit'])) {
 
     $username = $_POST['register-username'];
+    $data = ['username' => $username];
     $email = $_POST['register-email'];
     $password = $_POST['register-password'];
     $repassword = $_POST['register-repassword'];
-    var_dump($_POST);
     if ($password === $repassword) {
-        var_dump($username, $email, $password);
-        $session->register($email, $password, []);
+        $session->register($email, $password, $data);
+        var_dump($session);
         $tekstas = "Jus uzsiregistravote sekmingai";
     } else {
         $tekstas = "Ivesti slaptazodžiai nevienodi";
@@ -32,7 +31,6 @@ if (isset($_POST['register-submit'])) {
 if (isset($_POST['login-submit'])) {
     $email = $_POST['login-email'];
     $password = $_POST['login-password'];
-    var_dump($_POST);
     $session->login($email, $password);
 }
 
