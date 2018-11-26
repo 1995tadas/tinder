@@ -28,6 +28,11 @@ Class Model {
         $this->database->save($data);
     }
 
+    public function loadAll() {
+        $data = $this->database->load();
+        return $data[$this->table_name] ?? false;
+    }
+
 }
 
 ?>

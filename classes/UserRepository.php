@@ -17,5 +17,9 @@ Class UserRepository {
     public function load($email) {
        return $this->model->load($email);
     }
-
+    public function loadAllUsers() {
+        return $this->model->loadAll();
+    }
+    
+   
 }

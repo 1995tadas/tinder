@@ -10,7 +10,6 @@ class Database {
     }
 
     public function init() {
-
         if (!file_exists($this->file)) {
             file_put_contents($this->file, '');
         }
