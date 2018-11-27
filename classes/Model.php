@@ -13,7 +13,6 @@ Class Model {
     public function insertOrUpdate($id, $record) {
         $data = $this->database->load();
         $data[$this->table_name][$id] = $record;
-        var_dump($record);
         $this->database->save($data);
     }
 

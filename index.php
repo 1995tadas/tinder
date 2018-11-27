@@ -77,11 +77,8 @@ if ($session->isLogggedin()) {
     } else {
         $viewed_user = $tinder->userViewLast();
     }
-
-    if (!$viewed_user) {
-        $tinder->dataClear();
-        var_dump('Viskas, Tu busi Foreveralone');
-    }
+    
+    $matches = $tinder->getMatches();
 }
 ?>
 <!DOCTYPE html>
@@ -163,7 +160,6 @@ if ($session->isLogggedin()) {
                 <p>Pasirinkite savo lytį:</p>
                 <input class ="radio" name="register-gender" type="radio" value="men" required>Vyras<br>
                 <input class ="radio" name="register-gender" type="radio" value="women" required>Moteris<br>
-                <input class ="radio" name="register-gender" type="radio" value="other" required>Kita<br>
                 <button name ="register-submit" type='submit'>Registruokis</button>
                 <label for='form-switch'>Prisijungimas</label>
             </form>
@@ -193,10 +189,10 @@ if ($session->isLogggedin()) {
                     <button class="tinder-icon dislike" name="action" value="dislike"></button> 
                 </form>
             <?php endif; ?>
-            <?php if (!empty($tinder->getMatches())): ?>
+            <?php if (!empty($matches)): ?>
                 <div class="tinder">
                     <h1>Matches:</h1>
-                    <?php foreach ($tinder->getMatches() as $user): ?>
+                    <?php foreach ($matches as $user): ?>
                         <p><?php print ($user->getDataItem('username')) ?></p>
                         <img src="<?php print $user->getDataItem('photo') ?>">
                     <?php endforeach; ?>

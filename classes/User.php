@@ -29,7 +29,7 @@ Class User {
     }
 
     public function getDataItem($data_idx) {
-        return $this->data[$data_idx];
+        return $this->data[$data_idx] ?? null;
     }
     
 }

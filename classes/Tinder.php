@@ -22,15 +22,18 @@ class Tinder {
             $this->viewed = $data['viewed'] ?? [];
             $this->liked = $data['liked'] ?? [];
         }
-        var_dump($this->user);
         $this->matches = [];
     }
 
     public function userViewNext() {
         foreach ($this->repo->loadAllUsers() as $user) {
-            if (!in_array($user->getEmail(), $this->viewed)) {
-                $this->viewed[] = $user;
-                return $user;
+            if ($this->user->getDataItem('gender') != $user->getDataItem('gender')) {
+                if ($this->user->getEmail() != $user->getEmail()) {
+                    if (!in_array($user->getEmail(), $this->viewed)) {
+                        $this->viewed[] = $user->getEmail();
+                        return $user;
+                    }
+                }
             }
         }
     }
@@ -39,25 +42,31 @@ class Tinder {
         if (empty($this->viewed)) {
             return $this->userViewNext();
         } else {
-            return end($this->viewed);
+            $email = end($this->viewed);
+            return $this->repo->load($email);
         }
     }
 
     public function userLike() {
         $user = $this->userViewLast();
-        if ($user->tryMatch()) {
-            $this->matches[] = $user;
-        }
+        $temp = $user->getEmail();
+        $this->liked[$temp] = $temp;
     }
 
     public function getMatches() {
+        foreach ($this->liked as $useremail) {
+            $thisuser = $this->repo->load($useremail);
+            $thisuserlikes = $thisuser->getDataItem('liked') ?? [];
+            if (in_array($this->user->getEmail(), $thisuserlikes)) {
+                $this->matches[] = $thisuser;
+            }
+        }
         return $this->matches;
     }
 
     public function dataLoad() {
         $data = $this->repo->load();
         if ($data) {
-            var_dump($data);
             $this->viewed = $data['viewed'] ?? [];
             $this->matches = $data['matches'] ?? [];
         }
@@ -66,6 +75,7 @@ class Tinder {
 //Save data to text file
     public function dataSave() {
         $this->user->setDataItem('viewed', $this->viewed);
+        $this->user->setDataItem('liked', $this->liked);
         $this->repo->save($this->user);
     }
 
