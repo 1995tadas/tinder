@@ -1,26 +1,32 @@
 <?php
-require 'classes/Database.php';
-require 'classes/Model.php';
-require 'classes/Tinder.php';
-require 'classes/Session.php';
-require 'classes/abstract/AbstractUser.php';
-require 'classes/User.php';
-require 'classes/UserRepository.php';
-$db = new Database("db.txt");
-$repository = new UserRepository($db);
+define('DEBUG', true);
+
+require_once 'classes/abstracts/Model.php';
+require_once 'classes/SQLBuilder.php';
+
+require_once 'classes/MysqlDatabase.php';
+require_once 'classes/UserRepository.php';
+
+require_once 'classes/models/ModelUsers.php';
+require_once 'classes/Session.php';
+require_once 'classes/User.php';
+require_once 'classes/Tinder.php';
+
+
+$database = new MysqlDatabase('root', '', 'localhost', 'tinder');
+$repository = new UserRepository($database);
 $session = new Session($repository);
 $message = null;
 $data = [];
 //register
 
 if (isset($_POST['register-submit'])) {
-    $username = $_POST['register-username'] ?? false;
+    $full_name = $_POST['register-full_name'] ?? false;
     $email = $_POST['register-email'] ?? false;
     $password = $_POST['register-password'] ?? false;
     $repassword = $_POST['register-repassword'] ?? false;
     $age = $_POST['register-age'] ?? false;
     $gender = $_POST['register-gender'] ?? false;
-
     if ($password == $repassword) {
         $photo = $_FILES['photo'] ?? false;
         if ($photo['error'] == 0) {
@@ -32,7 +38,7 @@ if (isset($_POST['register-submit'])) {
                 $target_path = $target_dir . '/' . $target_fname;
                 if (move_uploaded_file($photo['tmp_name'], $target_path)) {
                     $data['photo'] = $target_path;
-                    $data['username'] = $username;
+                    $data['full_name'] = $full_name;
                     $data['age'] = $age;
                     $data['gender'] = $gender;
                     print "Failas sekmingai ikeltas";
@@ -61,7 +67,7 @@ if (isset($_POST['login-logout'])) {
     $session->logout();
 }
 //login-check
-if ($session->isLogggedin()) {
+if ($session->isLoggedin()) {
     $message = "Jus esate prisijunges";
     $tinder = new Tinder($repository, $session);
     $action = $_POST['action'] ?? false;
@@ -77,7 +83,7 @@ if ($session->isLogggedin()) {
     } else {
         $viewed_user = $tinder->userViewLast();
     }
-    
+
     $matches = $tinder->getMatches();
 }
 ?>
@@ -148,18 +154,18 @@ if ($session->isLogggedin()) {
     </head>
     <body>
 
-        <?php if (!$session->isLogggedin()): ?>
+        <?php if (!$session->isLoggedin()): ?>
             <input type='checkbox' id='form-switch'>
             <form id='register-form' enctype="multipart/form-data" action="index.php" method='post'>
-                <input name="register-username" type="text" placeholder="Vardas" required>
+                <input name="register-full_name" type="text" placeholder="Vardas ir pavarde" required>
                 <input name="register-email" type="email" placeholder="El.paštas" required>
                 <input name="register-password" type="password" placeholder="Slaptažodis" required>
                 <input name="register-repassword"  type="password" placeholder="Pakartokite slaptažodį" required>
                 <input name ="register-age" type="number" placeholder="Amžius" required >
                 Pasirinkite nuotrauką "jpg" ar "png" formatu <input name="photo" type="file" required> 
                 <p>Pasirinkite savo lytį:</p>
-                <input class ="radio" name="register-gender" type="radio" value="men" required>Vyras<br>
-                <input class ="radio" name="register-gender" type="radio" value="women" required>Moteris<br>
+                <input class ="radio" name="register-gender" type="radio" value="m" required>Vyras<br>
+                <input class ="radio" name="register-gender" type="radio" value="w" required>Moteris<br>
                 <button name ="register-submit" type='submit'>Registruokis</button>
                 <label for='form-switch'>Prisijungimas</label>
             </form>
@@ -170,7 +176,7 @@ if ($session->isLogggedin()) {
                 <label for='form-switch'><span>Registracija</span></label>
             </form>
         <?php endif; ?>
-        <?php if ($session->isLogggedin()): ?>
+        <?php if ($session->isLoggedin()): ?>
             <form id='logout-form' action="index.php" method='post'>
                 <button name="login-logout"  type='submit'>Atsijunk</button>
             </form>
@@ -179,11 +185,11 @@ if ($session->isLogggedin()) {
             <?php print $message ?>
         </h1>
 
-        <?php if ($session->isLogggedin()): ?>
+        <?php if ($session->isLoggedin()): ?>
             <?php if ($viewed_user): ?>
                 <form action="index.php" method="POST">
                     <img class="main-photo" src="<?php print $viewed_user->getDataItem('photo') ?>">
-                    <h1><?php print $viewed_user->getDataItem('username') ?></h1>
+                    <h1><?php print $viewed_user->getDataItem('full_name') ?></h1>
                     <p><?php print $viewed_user->getDataItem('age') ?></p>
                     <button class="tinder-icon like" name="action" value="like"></button>
                     <button class="tinder-icon dislike" name="action" value="dislike"></button> 
@@ -193,11 +199,10 @@ if ($session->isLogggedin()) {
                 <div class="tinder">
                     <h1>Matches:</h1>
                     <?php foreach ($matches as $user): ?>
-                        <p><?php print ($user->getDataItem('username')) ?></p>
+                        <p><?php print ($user->getDataItem('full_name')) ?></p>
                         <img src="<?php print $user->getDataItem('photo') ?>">
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
         <?php endif; ?>
     </body>
-

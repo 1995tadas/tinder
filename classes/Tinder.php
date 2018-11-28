@@ -26,7 +26,7 @@ class Tinder {
     }
 
     public function userViewNext() {
-        foreach ($this->repo->loadAllUsers() as $user) {
+        foreach ($this->repo->loadAll() as $user) {
             if ($this->user->getDataItem('gender') != $user->getDataItem('gender')) {
                 if ($this->user->getEmail() != $user->getEmail()) {
                     if (!in_array($user->getEmail(), $this->viewed)) {
