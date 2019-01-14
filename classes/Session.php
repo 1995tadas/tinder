@@ -51,6 +51,8 @@ class Session {
         } else {
             $this->register_success = false;
         }
+        
+        return $this->register_success;
     }
 
     public function isRegistrationSuccessful() {

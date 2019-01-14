@@ -1,88 +1,159 @@
 <?php
 
-//
-
 class Tinder {
 
+    /**
+     * Array of viewed User objects
+     * @var User[]
+     */
     private $viewed;
-    private $matches;
+
+    /**
+     * Array of liked User objects
+     * @var User[]
+     */
     private $liked;
     private $session;
+
+    /**
+     * User Repository Class Injection
+     * @var UserRepository
+     */
     private $repo;
+
+    /**
+     * 
+     * @var 
+     */
     private $user;
+    private $matches;
 
-    public function __construct(UserRepository $repo, Session $session) {
+    /**
+     *  Mysql Database Instance
+     * @var type MysqlDatabase
+     */
+    private $db;
 
+    public function __construct(MysqlDatabase $db, UserRepository $repo, Session $session) {
+        $this->db = $db;
         $this->repo = $repo;
         $this->session = $session;
+
+        $this->modelData = new ModelTinderData($db, 'tinder_data');
+
+        $this->matches = [];
+        $this->viewed = [];
+        $this->liked = [];
+        /**
+         * @var ModelTinderViews
+         */
         $this->user = $session->getCurrentUser();
 
         if ($this->user) {
-            $data = $this->user->getData();
-            $this->viewed = $data['viewed'] ?? [];
-            $this->liked = $data['liked'] ?? [];
+            $this->viewed = $this->loadViewedEmails($this->user->getEmail());
+            $this->liked = $this->loadLikedEmails($this->user->getEmail());
         }
-        $this->matches = [];
     }
 
+    /**
+     * 
+     * @return type
+     */
+    public function loadViewedEmails() {
+        $viewed_records = $this->modelData->load($this->user->getEmail());
+        foreach ($viewed_records as $record) {
+            $this->viewed[$record['email_user_viewed']] = $record['email_user_viewed'];
+        }
+
+        return $this->viewed;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function loadLastViewedEmail() {
+        $records = $this->modelData->loadByAction($this->user->getEmail(), '');
+        if (!empty($records)) {
+            return end($records)['email_user_viewed'];
+        }
+
+        return null;
+    }
+/**
+ * 
+ * @param string $email
+ * @return type
+ */
+    public function loadLikedEmails($email) {
+        $emails = [];
+        $liked_records = $this->modelData->loadByAction($email, 'like');
+        foreach ($liked_records as $record) {
+            $emails[$record['email_user_viewed']] = $record['email_user_viewed'];
+        }
+
+        return $emails;
+    }
+
+    
+    /**
+     * 
+     * @return Girl
+     */
+    //View next user
     public function userViewNext() {
         foreach ($this->repo->loadAll() as $user) {
-            if ($this->user->getDataItem('gender') != $user->getDataItem('gender')) {
-                if ($this->user->getEmail() != $user->getEmail()) {
-                    if (!in_array($user->getEmail(), $this->viewed)) {
-                        $this->viewed[] = $user->getEmail();
-                        return $user;
-                    }
+            if ($this->user->getEmail() != $user->getEmail()) {
+                if (!in_array($user->getEmail(), $this->viewed) && $this->user->getGender() != $user->getGender()) {
+                    $this->viewed[] = $user->getEmail();
+                    $this->modelData->insert($this->user->getEmail(), $user->getEmail(), '');
+                    return $user;
                 }
             }
         }
     }
-
+/**
+ * View last user you have seen (if no botton pressed return same user)
+ * @return type
+ */
     public function userViewLast() {
         if (empty($this->viewed)) {
             return $this->userViewNext();
         } else {
-            $email = end($this->viewed);
-            return $this->repo->load($email);
+            return $this->repo->load($this->loadLastViewedEmail());
         }
     }
-
+/**
+ * 
+ */
     public function userLike() {
         $user = $this->userViewLast();
-        $temp = $user->getEmail();
-        $this->liked[$temp] = $temp;
+        if ($user) {
+            $this->modelData->update($this->user->getEmail(), $user->getEmail(), 'like');
+            $this->liked[] = $this->user->getEmail();
+        }
     }
-
+/**
+ * 
+ */
+    public function userDislike() {
+        $user = $this->userViewLast();
+        $this->modelData->update($this->user->getEmail(), $user->getEmail(), 'dislike');
+    }
+/**
+ * 
+ * @return type
+ */
     public function getMatches() {
-        foreach ($this->liked as $useremail) {
-            $thisuser = $this->repo->load($useremail);
-            $thisuserlikes = $thisuser->getDataItem('liked') ?? [];
-            if (in_array($this->user->getEmail(), $thisuserlikes)) {
-                $this->matches[] = $thisuser;
+        $this->matches = [];
+        foreach ($this->liked as $email) {
+            $user_liked_emails = $this->loadLikedEmails($email);
+            if (in_array($this->user->getEmail(), $user_liked_emails)) {
+                $this->matches[] = $this->repo->load($email);
             }
         }
+
         return $this->matches;
     }
 
-    public function dataLoad() {
-        $data = $this->repo->load();
-        if ($data) {
-            $this->viewed = $data['viewed'] ?? [];
-            $this->matches = $data['matches'] ?? [];
-        }
-    }
-
-//Save data to text file
-    public function dataSave() {
-        $this->user->setDataItem('viewed', $this->viewed);
-        $this->user->setDataItem('liked', $this->liked);
-        $this->repo->save($this->user);
-    }
-
-    public function dataClear() {
-        return $this->repo->delete();
-    }
-
 }
-?>
-

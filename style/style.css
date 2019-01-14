@@ -1,0 +1,110 @@
+
+
+body {
+    background-image: url(https://www.codeacademy.lt/wp-content/uploads/2017/05/icon-03-1.png);
+    background-size:cover;
+}
+.tinder-icon {
+    height:100px;
+    width:100px;
+    background-size:cover;
+}
+.tinder-icon.like {
+    background-image: url(https://roneelprasad.files.wordpress.com/2014/05/tinder-like.png);
+
+}
+.tinder-icon.dislike {
+    background-image: url(http://roneelprasad.files.wordpress.com/2014/05/tinder-nope.png);
+
+}
+.main-photo {
+    height:300px;
+    width:300px;
+}
+display {
+    display:inline;
+}
+.tinder img {
+    height:50px;
+    width:50px; 
+}
+
+form {
+    margin:0 auto;
+    width:300px
+}
+input {
+    margin-bottom:3px;
+    padding:10px;
+    width: 100%;
+    border:1px solid #CCC
+}
+button {
+    padding:10px
+}
+label {
+    cursor:pointer
+}
+#form-switch {
+    display:none
+}
+#register-form {
+    display:none
+}
+#form-switch:checked~#register-form {
+    display:block
+}
+#form-switch:checked~#login-form {
+    display:none
+}
+.radio {
+    width:auto;
+}
+.messages-wrapper {
+    background-color: #DFF2BF;
+    text-align: center;
+}
+
+.message {
+    font-size:30px;
+    color: #4F8A10;
+
+}
+.errors-wrapper {
+    background-color: #FFBABA;
+    text-align: center;
+}
+.error {
+    font-size:30px;
+    color: #D8000C;
+}
+
+button {
+
+    background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5',GradientType=0);
+    background-color:#79bbff;
+    border-radius:5px;
+    border:1px solid #337bc4;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    font-weight:bold;
+    padding:12px 44px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #528ecc;
+}
+button:hover {
+    background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff',GradientType=0);
+    background-color:#378de5;
+}
+button:active {
+    position:relative;
+    top:1px;
+}
+
+
+

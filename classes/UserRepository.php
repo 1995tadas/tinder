@@ -1,9 +1,10 @@
 <?php
 
-Class UserRepository {
 
-    private $db;
-    private $model;
+class UserRepository {
+
+    protected $db;
+    protected $model;
 
     public function __construct(MysqlDatabase $db) {
         $this->db = $db;
@@ -11,11 +12,9 @@ Class UserRepository {
     }
 
     public function add(User $user) {
-        $this->model->insert($user->getEmail(), $user->getData());
-    }
-
-    public function save(User $user) {
-        return $this->model->insertOrUpdate($user->getEmail(), $user);
+        $this->model->insert(
+                $user->getEmail(), $user->getData()
+        );
     }
 
     public function load($email) {
@@ -25,21 +24,26 @@ Class UserRepository {
         } else {
             return null;
         }
+        return $data ? new User($email, $data) : null;
     }
 
     public function loadAll() {
-        $users = [];
+        $user = [];
         $data_arr = $this->model->loadAll();
         foreach ($data_arr as $user_data) {
             $email = $user_data['email'];
             $users[$email] = new User($email, $user_data);
         }
+        // Useriu array
+        // Arrayjaus elementas - User klases instancija (objektas)
         return $users;
     }
 
     public function update(User $user) {
         $data = [];
-        $this->model->update($user->getEmail(), $user->getData());
+
+
+        $this->model->insertOrUpdate($user->getEmail(), $user->getData());
     }
 
     public function delete(User $user) {

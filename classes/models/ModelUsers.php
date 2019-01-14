@@ -72,17 +72,15 @@ class ModelUsers extends Model {
     }
 
     public function update($email, $data = array()) {
-        $row = $data;
         $sql = strtr('UPDATE @table SET @column_binds WHERE @column = @column_bind;', [
             '@table' => $this->table_name,
-            '@column_binds' => SQLBuilder::columnsEqualBinds(array_keys($row)),
+            '@column_binds' => SQLBuilder::columnsEqualBinds(array_keys($data)),
             '@column' => SQLBuilder::column('email'),
             '@column_bind' => SQLBuilder::bind('email'),
         ]);
-        var_dump($sql);
         $query = $this->db_c->prepare($sql);
         $query->bindValue(SQLbuilder::bind('email'), $email);
-        foreach ($row as $column => $value) {
+        foreach ($data as $column => $value) {
             $query->bindValue(SQLbuilder::bind($column), $value);
         }
         return $query->execute();
